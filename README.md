@@ -10,7 +10,7 @@ There are two modes for conjecturing with Christy.jl
 
 To run the Mi Amor mode, which essentially calls the functions and modules of Christy.jl as a single Julia script, clone this repository in a directory of your choice. Then open the terminal and run:
 
-```julia mi_amor.jl```
+```julia --project mi_amor.jl```
 
 This will prompt the user to enter a number associated with a invariant that Mi Amor will conjecture on. 
 
