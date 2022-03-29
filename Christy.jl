@@ -53,7 +53,7 @@ function write_to_me(target::String;
         println("Conjecture $(i). ",  ConjectureType.conj_string(conjs[i]))
         println("touch number = $(conjs[i].touch_number) \n")
     end
-
+    return conjs[conj_lims]
 
 end
 
@@ -97,6 +97,8 @@ function surprise_me(; conj_lims = 1:50, file_name = "data.csv")
         println("Conjecture $(i). ",  ConjectureType.conj_string(conjs[i]))
         println("touch number = $(conjs[i].touch_number) \n")
     end
+
+    return conjs[conj_lims]
 end
 
 
