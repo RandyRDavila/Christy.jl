@@ -135,13 +135,16 @@ function make_base_upper_linear_conjecture(data::DataFrame, target::String, othe
             conj.touch_number += 1
         end
     end
-
     return conj
 end
 
 
 
-function make_upper_linear_conjecture(data::DataFrame, target::String, other::String, props, object_type::String)
+function make_upper_linear_conjecture(data::DataFrame, 
+                                      target::String, 
+                                      other::String, 
+                                      props::Vector{String}, 
+                                      object_type::String)
     (X, y, objects) = get_data_arrays(data, target, other, props)
 
     model = JuMP.Model(GLPK.Optimizer)
@@ -168,13 +171,15 @@ function make_upper_linear_conjecture(data::DataFrame, target::String, other::St
             conj.touch_number += 1
         end
     end
-
     return conj
 end
 
 
-function make_base_lower_linear_conjecture(data_set, target, other, object_type)
-    (X, y, objects) = get_base_data_arrays(data_set, target, other)
+function make_base_lower_linear_conjecture(data::DataFrame, 
+                                           target::String, 
+                                           other::String, 
+                                           object_type::String)
+    (X, y, objects) = get_base_data_arrays(data, target, other)
 
     model = JuMP.Model(GLPK.Optimizer)
     @variable(model, m)
@@ -207,8 +212,12 @@ end
 
 
 
-function make_lower_linear_conjecture(data_set, target, other, props, object_type)
-    (X, y, objects) = get_data_arrays(data_set, target, other, props)
+function make_lower_linear_conjecture(data::DataFrame, 
+                                      target::String, 
+                                      other::String, 
+                                      props::Vector{String}, 
+                                      object_type::String)
+    (X, y, objects) = get_data_arrays(data, target, other, props)
 
     model = JuMP.Model(GLPK.Optimizer)
     @variable(model, m)
@@ -239,7 +248,11 @@ function make_lower_linear_conjecture(data_set, target, other, props, object_typ
 end
 
 
-function make_conjectures(data, targets, invariants, properties, object_type)
+function make_conjectures(data::DataFrame, 
+                         targets::Vector{String}, 
+                         invariants::Vector{String}, 
+                         properties::Vector{Vector{String}}, 
+                         object_type::String)
     conjs = []
     for target in targets
         invar = [x for x in invariants if x != target]
@@ -285,6 +298,5 @@ function filter(conjs)
     deleteat!(conjs, bad_indices)
     return conjs
 end
-
 
 end

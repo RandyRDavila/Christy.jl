@@ -5,6 +5,7 @@ export surprise_me
 
 using DataFrames
 using CSV
+using OhMyREPL
 
 # Import CoreFunctions module
 include("core_functions.jl")
