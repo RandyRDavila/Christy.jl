@@ -12,7 +12,10 @@ include("core_functions.jl")
 # Import ConjectureType module 
 include("conjecture_type.jl")
 
-function write_to_me(target; conj_lims = 1:50, file_name = "data.csv")
+function write_to_me(target::String; 
+                    conj_lims = 1:50, 
+                    file_name = "data.csv",
+                    object_type = "connected graph")
     # Read invariant data from csv 
     data = CSV.File(file_name)
 
@@ -40,7 +43,7 @@ function write_to_me(target; conj_lims = 1:50, file_name = "data.csv")
         push!(properties, prop)
     end
 
-    conjs = CoreFunctions.make_conjectures(data, [target], invariants, properties, "connected_graph")
+    conjs = CoreFunctions.make_conjectures(data, [target], invariants, properties, object_type)
     conjs = CoreFunctions.filter(conjs)
 
     println()
